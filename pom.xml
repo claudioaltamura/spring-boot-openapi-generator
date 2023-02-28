@@ -7,104 +7,153 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.4</version>
+        <version>3.0.2</version>
         <relativePath/> <!-- lookup parent from repository -->
-      </parent>
+    </parent>
 
-	<groupId>de.claudioaltamura</groupId>
-	<artifactId>spring-boot-openapi-generator</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-boot-openapi-generator</name>
-	<description>Demo project for OpenAPI Generator with Spring</description>
+    <groupId>de.claudioaltamura</groupId>
+    <artifactId>spring-boot-openapi-generator</artifactId>
+    <version>0.0.2-SNAPSHOT</version>
+    <name>spring-boot-openapi-generator</name>
+    <description>Demo project for OpenAPI Generator with Spring</description>
 
     <properties>
-        <java.version>11</java.version>
-        <awaitility.version>4.0.3</awaitility.version>
-        <openapi-generator.version>5.1.0</openapi-generator.version>
-        <spring.data.version>2.4.5</spring.data.version>
-        <jackson-databind.version>0.2.1</jackson-databind.version>
-        <springfox.version>2.9.2</springfox.version>
+        <assertj-core.version>3.24.2</assertj-core.version>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <springdoc-openapi.version>1.6.14</springdoc-openapi.version>
+        <openapi-generator.version>6.3.0</openapi-generator.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-       <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-        </dependency>
-        
-         <!-- openapi -->
-        <dependency>
-            <groupId>org.openapitools</groupId>
-            <artifactId>openapi-generator</artifactId>
-            <version>${openapi-generator.version}</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>org.openapitools</groupId>
-            <artifactId>jackson-databind-nullable</artifactId>
-            <version>${jackson-databind.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${springfox.version}</version>
+            <artifactId>jakarta.validation-api</artifactId>
+            <groupId>jakarta.validation</groupId>
+            <version>3.0.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.9.2</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
-            <groupId>org.awaitility</groupId>
-            <artifactId>awaitility</artifactId>
-            <version>${awaitility.version}</version>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj-core.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <groupId>org.springdoc</groupId>
+            <version>${springdoc-openapi.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>springdoc-openapi-security</artifactId>
+            <groupId>org.springdoc</groupId>
+            <version>1.6.14</version>
+        </dependency>
+        <dependency>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <groupId>org.openapitools</groupId>
+            <version>0.2.5</version>
+        </dependency>
     </dependencies>
-    
-     <build>
+
+    <build>
+        <finalName>app</finalName>
         <plugins>
             <plugin>
-                <groupId>org.openapitools</groupId>
-                <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>${openapi-generator.version}</version>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <artifactId>lombok</artifactId>
+                            <groupId>org.projectlombok</groupId>
+                        </exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
+                        <!-- used to show the build version at the actuator /info endpoint -->
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <groupId>org.springframework.boot</groupId>
+            </plugin>
+            <plugin>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <apiPackage>de.claudioaltamura.springboot.openapi.api</apiPackage>
+                            <configOptions>
+                                <artifactId>${project.artifactId}</artifactId>
+                                <basePackage>de.claudioaltamura.springboot.openapi</basePackage>
+                                <documentationProvider>springdoc</documentationProvider>
+                                <groupId>${project.groupId}</groupId>
+                                <interfaceOnly>true</interfaceOnly>
+                                <openApiNullable>true</openApiNullable>
+                                <reactive>false</reactive>
+                                <sourceFolder>src/main/gen</sourceFolder>
+                                <useTags>true</useTags>
+                                <version>${project.version}</version>
+                                <skipIfSpecIsUnchanged>true</skipIfSpecIsUnchanged>
+                                <useSpringBoot3>true</useSpringBoot3>
+                                <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
+                                <delegatePattern>true</delegatePattern>
+                            </configOptions>
+                            <generateApiDocumentation>true</generateApiDocumentation>
+                            <generatorName>spring</generatorName>
+                            <globalProperties>
+                                <skipFormModel>false</skipFormModel>
+                            </globalProperties>
+                            <inputSpec>${project.basedir}/src/main/resources/petstore.yaml</inputSpec>
+                            <library>spring-boot</library>
+                            <modelPackage>de.claudioaltamura.springboot.openapi.model</modelPackage>
+                            <output>${project.basedir}</output>
+                        </configuration>
                         <goals>
                             <goal>generate</goal>
                         </goals>
-                        <configuration>
-                            <inputSpec>
-                                ${project.basedir}/src/main/resources/petstore.yaml
-                            </inputSpec>
-                            <generatorName>spring</generatorName>
-                            <apiPackage>de.claudioaltamura.springboot.openapi.api</apiPackage>
-                            <modelPackage>de.claudioaltamura.springboot.openapi.model</modelPackage>
-                            <supportingFilesToGenerate>
-                                ApiUtil.java
-                            </supportingFilesToGenerate>
-                            <configOptions>
-                                <delegatePattern>true</delegatePattern>
-                            </configOptions>
-                        </configuration>
                     </execution>
                 </executions>
+                <groupId>org.openapitools</groupId>
+                <version>${openapi-generator.version}</version>
             </plugin>
-
-            <plugin>
-              <groupId>org.springframework.boot</groupId>
-              <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-          </plugins>  
+        </plugins>
     </build>
-    
+
 </project>
