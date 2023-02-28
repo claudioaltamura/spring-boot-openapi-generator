@@ -124,7 +124,7 @@
                                 <basePackage>de.claudioaltamura.springboot.openapi</basePackage>
                                 <documentationProvider>springdoc</documentationProvider>
                                 <groupId>${project.groupId}</groupId>
-                                <interfaceOnly>true</interfaceOnly>
+                                <interfaceOnly>false</interfaceOnly>
                                 <openApiNullable>true</openApiNullable>
                                 <reactive>false</reactive>
                                 <sourceFolder>src/main/gen</sourceFolder>
@@ -133,7 +133,7 @@
                                 <skipIfSpecIsUnchanged>true</skipIfSpecIsUnchanged>
                                 <useSpringBoot3>true</useSpringBoot3>
                                 <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
-                                <delegatePattern>true</delegatePattern>
+                                <delegatePattern>false</delegatePattern>
                             </configOptions>
                             <generateApiDocumentation>true</generateApiDocumentation>
                             <generatorName>spring</generatorName>
