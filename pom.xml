@@ -124,7 +124,7 @@
                                 <basePackage>de.claudioaltamura.springboot.openapi</basePackage>
                                 <documentationProvider>springdoc</documentationProvider>
                                 <groupId>${project.groupId}</groupId>
-                                <interfaceOnly>false</interfaceOnly>
+                                <interfaceOnly>true</interfaceOnly>
                                 <openApiNullable>true</openApiNullable>
                                 <reactive>false</reactive>
                                 <sourceFolder>src/main/gen</sourceFolder>
