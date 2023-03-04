@@ -9,10 +9,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
-@SpringBootTest
+@SpringBootTest(classes = OpenApiGeneratorApplication.class)
 @AutoConfigureMockMvc
 class OpenApiIntegrationTest {
-	private static final String PETS_PATH = "/pets/";
+	private static final String PETS_PATH = "/pets";
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -24,6 +24,6 @@ class OpenApiIntegrationTest {
 
 	@Test
 	void whenReadOne_thenStatusIsNotImplemented() throws Exception {
-		mockMvc.perform(get(PETS_PATH + 1)).andExpect(status().isNotImplemented());
+		mockMvc.perform(get(PETS_PATH + "/" + 1)).andExpect(status().isNotImplemented());
 	}
 }

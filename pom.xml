@@ -137,7 +137,8 @@
                                 <version>${project.version}</version>
                                 <basePackage>de.claudioaltamura.springboot.openapi</basePackage>
                                 <sourceFolder>src/main/gen</sourceFolder>
-                                <interfaceOnly>true</interfaceOnly>
+                                <interfaceOnly>false</interfaceOnly>
+                                <delegatePattern>false</delegatePattern>
                                 <openApiNullable>true</openApiNullable>
                                 <documentationProvider>springdoc</documentationProvider>
                                 <useTags>true</useTags>
