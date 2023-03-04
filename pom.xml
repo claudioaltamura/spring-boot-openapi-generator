@@ -114,44 +114,43 @@
                 <groupId>org.springframework.boot</groupId>
             </plugin>
             <plugin>
+                <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>${openapi-generator.version}</version>
                 <executions>
                     <execution>
-                        <configuration>
-                            <apiPackage>de.claudioaltamura.springboot.openapi.api</apiPackage>
-                            <configOptions>
-                                <artifactId>${project.artifactId}</artifactId>
-                                <basePackage>de.claudioaltamura.springboot.openapi</basePackage>
-                                <documentationProvider>springdoc</documentationProvider>
-                                <groupId>${project.groupId}</groupId>
-                                <interfaceOnly>true</interfaceOnly>
-                                <openApiNullable>true</openApiNullable>
-                                <reactive>false</reactive>
-                                <sourceFolder>src/main/gen</sourceFolder>
-                                <useTags>true</useTags>
-                                <version>${project.version}</version>
-                                <skipIfSpecIsUnchanged>true</skipIfSpecIsUnchanged>
-                                <useSpringBoot3>true</useSpringBoot3>
-                                <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
-                                <delegatePattern>false</delegatePattern>
-                            </configOptions>
-                            <generateApiDocumentation>true</generateApiDocumentation>
-                            <generatorName>spring</generatorName>
-                            <globalProperties>
-                                <skipFormModel>false</skipFormModel>
-                            </globalProperties>
-                            <inputSpec>${project.basedir}/src/main/resources/petstore.yaml</inputSpec>
-                            <library>spring-boot</library>
-                            <modelPackage>de.claudioaltamura.springboot.openapi.model</modelPackage>
-                            <output>${project.basedir}</output>
-                        </configuration>
                         <goals>
                             <goal>generate</goal>
                         </goals>
+                        <configuration>
+                            <generatorName>spring</generatorName>
+                            <inputSpec>${project.basedir}/src/main/resources/openapi.yaml</inputSpec>
+                            <library>spring-boot</library>
+                            <output>${project.basedir}</output>
+                            <apiPackage>de.claudioaltamura.springboot.openapi.api</apiPackage>
+                            <modelPackage>de.claudioaltamura.springboot.openapi.model</modelPackage>
+                            <generateApiDocumentation>true</generateApiDocumentation>
+                            <skipIfSpecIsUnchanged>true</skipIfSpecIsUnchanged>
+                            <configOptions>
+                                <artifactId>${project.artifactId}</artifactId>
+                                <groupId>${project.groupId}</groupId>
+                                <version>${project.version}</version>
+                                <basePackage>de.claudioaltamura.springboot.openapi</basePackage>
+                                <sourceFolder>src/main/gen</sourceFolder>
+                                <interfaceOnly>true</interfaceOnly>
+                                <openApiNullable>true</openApiNullable>
+                                <documentationProvider>springdoc</documentationProvider>
+                                <useTags>true</useTags>
+                                <legacyDiscriminatorBehavior>false</legacyDiscriminatorBehavior>
+                                <useSpringBoot3>true</useSpringBoot3>
+                                <useJakartaEe>true</useJakartaEe>
+                            </configOptions>
+                            <globalProperties>
+                                <skipFormModel>false</skipFormModel>
+                            </globalProperties>
+                        </configuration>
                     </execution>
                 </executions>
-                <groupId>org.openapitools</groupId>
-                <version>${openapi-generator.version}</version>
             </plugin>
         </plugins>
     </build>
