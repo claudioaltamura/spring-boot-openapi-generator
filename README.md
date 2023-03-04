@@ -24,7 +24,7 @@ delete the file under the folder .openapi-generator
 
 ## OpenAPI
 
-
+    http://localhost:8080/webjars/swagger-ui/index.html
 
 ### Development
 

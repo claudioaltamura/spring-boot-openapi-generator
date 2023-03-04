@@ -45,8 +45,8 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <artifactId>jakarta.validation-api</artifactId>
             <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
             <version>3.0.2</version>
         </dependency>
 
@@ -74,18 +74,13 @@
         </dependency>
 
         <dependency>
-            <artifactId>springdoc-openapi-ui</artifactId>
             <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
             <version>${springdoc-openapi.version}</version>
         </dependency>
         <dependency>
-            <artifactId>springdoc-openapi-security</artifactId>
-            <groupId>org.springdoc</groupId>
-            <version>1.6.14</version>
-        </dependency>
-        <dependency>
-            <artifactId>jackson-databind-nullable</artifactId>
             <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
             <version>0.2.5</version>
         </dependency>
     </dependencies>
@@ -98,8 +93,8 @@
                 <configuration>
                     <excludes>
                         <exclude>
-                            <artifactId>lombok</artifactId>
                             <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
                 </configuration>
