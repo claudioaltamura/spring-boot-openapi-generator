@@ -11,3 +11,5 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 /.idea/
 /spring-boot-openapi-generator.iml
+/.openapi-generator/
+/src/main/gen/

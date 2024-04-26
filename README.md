@@ -10,13 +10,15 @@ Spring Boot OpenAPI generator example
 OpenAPI spec must be named openapi.yml.
 
 ## Generate
-./mvnw clean compile
+
+    ./mvnw clean compile
 
 regenerating
 delete the file under the folder .openapi-generator
 
 ## Run
-./mvnw spring-boot:run
+
+    ./mvnw spring-boot:run
 
 ## Example
 
@@ -24,7 +26,9 @@ delete the file under the folder .openapi-generator
 
 ## OpenAPI
 
-    http://localhost:8080/webjars/swagger-ui/index.html
+    http://localhost:8080/v3/api-docs
+
+    http://localhost:8080/swagger-ui/index.html
 
 ### Development
 
